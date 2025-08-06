@@ -116,18 +116,46 @@
             border-radius: 3px;
             cursor: text;
             transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            -webkit-user-modify: read-write-plaintext-only;
+            -moz-user-modify: read-write;
+            user-modify: read-write;
+        }
+        
+        .editable * {
+            display: none !important;
+        }
+        
+        .editable br {
+            display: none !important;
+        }
+        
+        /* 禁用所有可能的contenteditable视觉指示器 */
+        .editable:focus {
+            outline: none !important;
+            background-color: #fff;
+            border-color: #e67e22;
+            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
+        }
+        
+        .editable::before,
+        .editable::after {
+            display: none !important;
+        }
+        
+        /* 禁用WebKit的编辑装饰 */
+        .editable::-webkit-input-placeholder {
+            color: transparent !important;
+        }
+        
+        .editable::-moz-placeholder {
+            color: transparent !important;
         }
         
         .editable:hover {
             background-color: #f8f9fa;
             border-color: #e67e22;
-        }
-        
-        .editable:focus {
-            outline: none;
-            background-color: #fff;
-            border-color: #e67e22;
-            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
         }
         
         .edit-hint {
@@ -195,35 +223,35 @@
         <div class="transaction-details">
             <div class="detail-row">
                 <div class="detail-label">Transaction Amount</div>
-                <div class="detail-value"><span class="editable" contenteditable="true">N10,900</span></div>
+                <div class="detail-value"><span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">N10,900</span></div>
             </div>
             
             <div class="detail-row">
                 <div class="detail-label">Transaction Type</div>
-                <div class="detail-value"><span class="editable" contenteditable="true">INTER-BANK</span></div>
+                <div class="detail-value"><span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">INTER-BANK</span></div>
             </div>
             
             <div class="detail-row">
                 <div class="detail-label">Transaction Date</div>
-                <div class="detail-value"><span class="editable" contenteditable="true">2025-08-03 06:12:58</span></div>
+                <div class="detail-value"><span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">2025-08-03 06:12:58</span></div>
             </div>
             
             <div class="detail-row">
                 <div class="detail-label">Sender</div>
-                <div class="detail-value"><span class="editable" contenteditable="true">ZHENGBEI REN</span></div>
+                <div class="detail-value"><span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">ZHENGBEI REN</span></div>
             </div>
             
             <div class="detail-row">
                 <div class="detail-label">Beneficiary</div>
                 <div class="detail-value">
                     <div class="beneficiary-line">
-                        <span class="editable" contenteditable="true">VICTOR INIOBONG ISAAC</span>
+                        <span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">VICTOR INIOBONG ISAAC</span>
                     </div>
                     <div class="beneficiary-line">
-                        <span class="editable" contenteditable="true">9061430891</span>
+                        <span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">9061430891</span>
                     </div>
                     <div class="beneficiary-line">
-                        <span class="editable" contenteditable="true">MONIEPOINT MICROFINANCE BANK</span>
+                        <span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">MONIEPOINT MICROFINANCE BANK</span>
                     </div>
                 </div>
             </div>
@@ -235,17 +263,17 @@
             
             <div class="detail-row">
                 <div class="detail-label">Transaction Reference</div>
-                <div class="detail-value"><span class="editable" contenteditable="true">NXG00001425080306124922148396487O</span></div>
+                <div class="detail-value"><span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">NXG00001425080306124922148396487O</span></div>
             </div>
             
             <div class="detail-row">
                 <div class="detail-label">Session Id</div>
-                <div class="detail-value"><span class="editable" contenteditable="true">0000142508030612492214839648470</span></div>
+                <div class="detail-value"><span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">0000142508030612492214839648470</span></div>
             </div>
             
             <div class="detail-row">
                 <div class="detail-label">Transaction Status</div>
-                <div class="detail-value"><span class="editable" contenteditable="true">Transfer Request Successful</span></div>
+                <div class="detail-value"><span class="editable" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">Transfer Request Successful</span></div>
             </div>
         </div>
         
@@ -268,6 +296,12 @@
         // 添加一些交互功能
         document.addEventListener('DOMContentLoaded', function() {
             const editableElements = document.querySelectorAll('.editable');
+            
+            // 清理所有可编辑元素中的HTML标签
+            editableElements.forEach(element => {
+                // 清理初始内容
+                element.textContent = element.textContent;
+            });
             
             editableElements.forEach(element => {
                 // 点击时选中所有文本
@@ -300,6 +334,21 @@
                     if (e.key === 'Escape') {
                         this.textContent = this.getAttribute('data-original');
                         this.blur();
+                    }
+                });
+                
+                // 防止粘贴HTML内容
+                element.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+                    this.textContent = text;
+                });
+                
+                // 监听内容变化，确保只保留纯文本
+                element.addEventListener('input', function() {
+                    const text = this.textContent;
+                    if (this.innerHTML !== text) {
+                        this.textContent = text;
                     }
                 });
             });
