@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交易收据</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .receipt-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+        }
+        
+        .tagline-section {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .diagonal-line {
+            width: 70px;
+            height: 3px;
+            background-color: #e67e22;
+            transform: rotate(-35deg);
+        }
+        
+        .tagline {
+            color: #e67e22;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c5b8a;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .transaction-details {
+            width: 100%;
+        }
+        
+        .detail-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            width: 150px;
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .detail-value {
+            flex: 1;
+            color: #2c5b8a;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .editable {
+            background-color: transparent;
+            border: 1px dashed transparent;
+            padding: 2px;
+            border-radius: 3px;
+            cursor: text;
+            transition: all 0.2s ease;
+        }
+        
+        .editable:hover {
+            background-color: #f8f9fa;
+            border-color: #e67e22;
+        }
+        
+        .editable:focus {
+            outline: none;
+            background-color: #fff;
+            border-color: #e67e22;
+            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.2);
+        }
+        
+        .edit-hint {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        .contact-section {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .contact-links {
+            color: #2c5b8a;
+            text-decoration: none;
+        }
+        
+        .contact-links:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-text {
+            font-size: 11px;
+            color: #888;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit-hint">💡 点击蓝色文字即可编辑</div>
+    <div class="receipt-container">
+        <div class="header">
+            <div class="logo-section">
+                <img src="access-bank-plc-logo-png_seeklogo-492413.png" alt="Access Bank Logo" class="logo">
+            </div>
+            <div class="tagline-section">
+                <div class="diagonal-line"></div>
+                <div class="tagline">more than banking</div>
+            </div>
+        </div>
+        
+        <h1 class="title">Transaction Receipt</h1>
+        
+        <div class="subtitle">
+            Generated from <strong>AccessMore</strong> on 03/08/25 06:13:20
+        </div>
+        
+        <div class="transaction-details">
+            <div class="detail-row">
+                <div class="detail-label">Transaction Amount</div>
+                <div class="detail-value"><span class="editable" contenteditable="true">N10,900</span></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Transaction Type</div>
+                <div class="detail-value"><span class="editable" contenteditable="true">INTER-BANK</span></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Transaction Date</div>
+                <div class="detail-value"><span class="editable" contenteditable="true">2025-08-03 06:12:58</span></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Sender</div>
+                <div class="detail-value"><span class="editable" contenteditable="true">ZHENGBEI REN</span></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Beneficiary</div>
+                <div class="detail-value">
+                    <span class="editable" contenteditable="true">VICTOR INIOBONG ISAAC</span><br>
+                    <span class="editable" contenteditable="true">9061430891</span><br>
+                    <span class="editable" contenteditable="true">MONIEPOINT MICROFINANCE BANK</span>
+                </div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Remark</div>
+                <div class="detail-value"></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Transaction Reference</div>
+                <div class="detail-value"><span class="editable" contenteditable="true">NXG00001425080306124922148396487O</span></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Session Id</div>
+                <div class="detail-value"><span class="editable" contenteditable="true">0000142508030612492214839648470</span></div>
+            </div>
+            
+            <div class="detail-row">
+                <div class="detail-label">Transaction Status</div>
+                <div class="detail-value"><span class="editable" contenteditable="true">Transfer Request Successful</span></div>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            If you have any questions or would like more information, please call our 24-hour Contact Centre on
+            <a href="tel:0700" class="contact-links">0700CallAccess</a>, 
+            <a href="tel:07003000000" class="contact-links">0700 3000000</a>, 
+            <a href="tel:+234201-2712005-7" class="contact-links">+234 201-2712005-7</a>, 
+            <a href="tel:+234201-2802500" class="contact-links">+234 201-2802500</a> or send an email to
+            <a href="mailto:contactcenter@accessbankplc.com" class="contact-links">contactcenter@accessbankplc.com</a><br>
+            Thank you for choosing Access Bank.
+            
+            <div class="footer-text">
+                Banking with Access: Branch | ATM | Online | Mobile | Contact centre
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 添加一些交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const editableElements = document.querySelectorAll('.editable');
+            
+            editableElements.forEach(element => {
+                // 点击时选中所有文本
+                element.addEventListener('click', function() {
+                    if (document.selection) {
+                        var range = document.body.createTextRange();
+                        range.moveToElementText(this);
+                        range.select();
+                    } else if (window.getSelection) {
+                        var range = document.createRange();
+                        range.selectNodeContents(this);
+                        window.getSelection().removeAllRanges();
+                        window.getSelection().addRange(range);
+                    }
+                });
+                
+                // 按Enter键时失去焦点
+                element.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        this.blur();
+                    }
+                });
+                
+                // 保存原始值以备恢复
+                element.setAttribute('data-original', element.textContent);
+                
+                // ESC键恢复原始值
+                element.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        this.textContent = this.getAttribute('data-original');
+                        this.blur();
+                    }
+                });
+            });
+            
+            // 3秒后隐藏提示
+            setTimeout(() => {
+                const hint = document.querySelector('.edit-hint');
+                if (hint) {
+                    hint.style.opacity = '0';
+                    setTimeout(() => hint.remove(), 300);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
